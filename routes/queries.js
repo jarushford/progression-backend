@@ -5,11 +5,11 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://localhost:5432/users';
+var connectionString = 'postgres://localhost:5432/progressionusers';
 var db = pgp(connectionString);
 
 function getAllUsers(req, res, next) {
-  db.any('select * from users')
+  db.any('select * from progressionusers')
     .then(function(data) {
       res.status(200).json({
         status: 'success',

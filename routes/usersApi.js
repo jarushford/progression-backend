@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./queries');
 
-router.get('/users', db.getAllUsers)
+router.get('/progressionusers', db.getAllUsers)
 router.post('/users', db.signIn) // must have a body with email and password
 router.post('/users/new', db.createUser)
 router.post('/users/favorites/new', db.addFavorite)
