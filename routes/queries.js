@@ -22,7 +22,7 @@ function getAllUsers(req, res, next) {
 }
 
 function signIn(req, res, next) {
-  db.one('select * from users where email=${email} and password=${password}', req.body)
+  db.one('select * from progressionusers where email=${email} and password=${password}', req.body)
   .then(function (data) {
   res.status(200)
     .json({
@@ -38,12 +38,16 @@ function signIn(req, res, next) {
 
 function createUser(req, res, next) {
   req.body.email = req.body.email.toLowerCase();
-  db.one('insert into users(name, password, email)' + 'values(${name}, ${password}, ${email}) returning id', req.body).then(function(data) {
+  db.one('insert into progressionusers(name, password, email)' + 'values(${name}, ${password}, ${email}) returning id', req.body).then(function(data) {
     res.status(200).json({ status: 'success', message: "New user created", id: data.id});
   }).catch(function(err) {
     res.status(500).json({error: err.detail});
   })
 }
+
+
+
+
 
 function addFavorite(req, res, next) {
   db.one('insert into favorites(movie_id, user_id, title, poster_path, release_date, vote_average, overview)' +
