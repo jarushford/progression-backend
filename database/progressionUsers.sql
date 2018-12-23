@@ -16,7 +16,7 @@ CREATE TABLE ascents (
   name VARCHAR (123) NOT NULL,
   location VARCHAR (123) NOT NULL,
   grade VARCHAR (123) NOT NULL,
-  caption VARCHAR (123) NOT NULL
+  caption VARCHAR (100) NOT NULL
 );
 
 CREATE TABLE projects (
@@ -30,7 +30,7 @@ CREATE TABLE projects (
   moves_total VARCHAR (123) NOT NULL,
   moves_done VARCHAR (123) NOT NULL,
   high_point VARCHAR (123) NOT NULL,
-  caption VARCHAR (123) NOT NULL
+  caption VARCHAR (100) NOT NULL
 );
 
 CREATE TABLE workouts (
