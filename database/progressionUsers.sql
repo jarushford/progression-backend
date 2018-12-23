@@ -36,7 +36,7 @@ CREATE TABLE projects (
 CREATE TABLE workouts (
   id SERIAL NOT NULL PRIMARY KEY,
   user_id INTEGER NOT NULL,
-  date VARCHAR (123) NOT NULL,
+  workout_date VARCHAR (123) NOT NULL,
   type VARCHAR (123) NOT NULL,
   description VARCHAR (123) NOT NULL
 );

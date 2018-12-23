@@ -135,8 +135,8 @@ function deleteProject(req, res, next) {
 
 
 function addWorkout(req, res, next) {
-  db.one('insert into workouts(id, user_id, date, type, description)' +
-  'values(${id}, ${user_id}, ${date}, ${type}, ${desctiption}) returning id', req.body)
+  db.one('insert into workouts(user_id, workout_date, type, description)' +
+  'values(${user_id}, ${workout_date}, ${type}, ${description}) returning id', req.body)
   .then(function(data) {
     res.status(200).json({ status: 'success', message: "Workout was added to database", id: data.id});
   }).catch(function(err) {
