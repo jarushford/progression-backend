@@ -51,8 +51,8 @@ function createUser(req, res, next) {
 
 
 function addAscent(req, res, next) {
-  db.one('insert into ascents(id, user_id, name, location, grade, caption)' +
-  'values(${id}, ${user_id}, ${name}, ${location}, ${grade}, ${caption}) returning id', req.body)
+  db.one('insert into ascents(user_id, name, location, grade, caption)' +
+  'values(${user_id}, ${name}, ${location}, ${grade}, ${caption}) returning id', req.body)
   .then(function(data) {
     res.status(200).json({ status: 'success', message: "Ascent was added to database", id: data.id});
   }).catch(function(err) {
@@ -93,8 +93,8 @@ function deleteAscent(req, res, next) {
 
 
 function addProject(req, res, next) {
-  db.one('insert into projects(id, user_id, name, location, grade, priority, season, moves_total, moves_done, high_point, caption)' +
-  'values(${id}, ${user_id}, ${name}, ${location}, ${grade}, ${priority}, ${season}, ${moves_total}, ${moves_done}, ${high_point}, ${caption}) returning id', req.body)
+  db.one('insert into projects(user_id, name, location, grade, priority, season, moves_total, moves_done, high_point, caption)' +
+  'values(${user_id}, ${name}, ${location}, ${grade}, ${priority}, ${season}, ${moves_total}, ${moves_done}, ${high_point}, ${caption}) returning id', req.body)
   .then(function(data) {
     res.status(200).json({ status: 'success', message: "Project was added to database", id: data.id});
   }).catch(function(err) {

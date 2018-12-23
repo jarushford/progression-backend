@@ -25,11 +25,11 @@ CREATE TABLE projects (
   name VARCHAR (123) NOT NULL,
   location VARCHAR (123) NOT NULL,
   grade VARCHAR (123) NOT NULL,
-  priority INTEGER NOT NULL,
+  priority VARCHAR (123) NOT NULL,
   season VARCHAR (123) NOT NULL,
-  moves_total INTEGER NOT NULL,
-  moves_done INTEGER NOT NULL,
-  high_point INTEGER NOT NULL,
+  moves_total VARCHAR (123) NOT NULL,
+  moves_done VARCHAR (123) NOT NULL,
+  high_point VARCHAR (123) NOT NULL,
   caption VARCHAR (123) NOT NULL
 );
 
