@@ -16,7 +16,29 @@ CREATE TABLE ascents (
   name VARCHAR (123) NOT NULL,
   location VARCHAR (123) NOT NULL,
   grade VARCHAR (123) NOT NULL,
-  caption VARCHAR NOT NULL
+  caption VARCHAR (123) NOT NULL
+);
+
+CREATE TABLE projects (
+  id SERIAL NOT NULL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  name VARCHAR (123) NOT NULL,
+  location VARCHAR (123) NOT NULL,
+  grade VARCHAR (123) NOT NULL,
+  priority INTEGER NOT NULL,
+  season VARCHAR (123) NOT NULL,
+  moves_total INTEGER NOT NULL,
+  moves_done INTEGER NOT NULL,
+  high_point INTEGER NOT NULL,
+  caption VARCHAR (123) NOT NULL
+);
+
+CREATE TABLE workouts (
+  id SERIAL NOT NULL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  date VARCHAR (123) NOT NULL,
+  type VARCHAR (123) NOT NULL,
+  description VARCHAR (123) NOT NULL
 );
 
 CREATE UNIQUE INDEX email ON progressionusers (email);
