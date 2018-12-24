@@ -76,9 +76,9 @@ function getAllAscents(req, res, next) {
 }
 
 function deleteAscent(req, res, next) {
-  var ascent_id = parseInt(req.params.ascent_id);
+  var id = parseInt(req.params.ascent_id);
   var user_id = parseInt(req.params.id);
-  db.result('delete from ascents where user_id = $1 and ascent_id = $2', [user_id, ascent_id]).then(function(result) {
+  db.result('delete from ascents where id = $1 and user_id = $2', [id, user_id]).then(function(result) {
     res.status(200)
     .json({status: 'success', message: `${result.rowCount} row was deleted.`})
   })
@@ -118,9 +118,9 @@ function getAllProjects(req, res, next) {
 }
 
 function deleteProject(req, res, next) {
-  var project_id = parseInt(req.params.project_id);
+  var id = parseInt(req.params.project_id);
   var user_id = parseInt(req.params.id);
-  db.result('delete from projects where user_id = $1 and project_id = $2', [user_id, project_id]).then(function(result) {
+  db.result('delete from projects where id = $1 and user_id = $2', [id, user_id]).then(function(result) {
     res.status(200)
     .json({status: 'success', message: `${result.rowCount} row was deleted.`})
   })
@@ -160,9 +160,9 @@ function getAllWorkouts(req, res, next) {
 }
 
 function deleteWorkout(req, res, next) {
-  var workout_id = parseInt(req.params.workout_id);
+  var id = parseInt(req.params.workout_id);
   var user_id = parseInt(req.params.id);
-  db.result('delete from workouts where user_id = $1 and project_id = $2', [user_id, workout_id]).then(function(result) {
+  db.result('delete from workouts where id = $1 and user_id = $2', [id, user_id]).then(function(result) {
     res.status(200)
     .json({status: 'success', message: `${result.rowCount} row was deleted.`})
   })
