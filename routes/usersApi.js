@@ -15,6 +15,10 @@ router.get('/progressionusers/:id/projects', db.getAllProjects)
 router.delete('/progressionusers/:id/projects/:project_id', db.deleteProject)
 // router.patch('/progressionusers/:id/projects/:project_id', db.editProject)
 
+router.post('/progressionusers/milestones/new', db.addMilestone)
+router.get('/progressionusers/:id/projects/:project_id/milestones', db.getAllMilestones)
+// router.delete('/progressionusers/:id/projects/:project_id/milestones/:milestone_id', db.deleteMilestone)
+
 router.post('/progressionusers/workouts/new', db.addWorkout)
 router.get('/progressionusers/:id/workouts', db.getAllWorkouts)
 router.delete('/progressionusers/:id/workouts/:workout_id', db.deleteWorkout)

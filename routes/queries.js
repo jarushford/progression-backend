@@ -171,6 +171,39 @@ function deleteWorkout(req, res, next) {
   })
 }
 
+
+///////////////////////////
+///////////////////////////
+
+
+function addMilestone(req, res, next) {
+  db.one('insert into milestones(user_id, project_id, milestone_date, caption)' +
+  'values(${user_id}, ${project_id}, ${milestone_date}, ${caption}) returning id', req.body)
+  .then(function(data) {
+    res.status(200).json({ status: 'success', message: "Milestone was added to database", id: data.id});
+  }).catch(function(err) {
+    next(err);
+  })
+}
+
+function getAllMilestones(req, res, next) {
+  var user_id = parseInt(req.params.id);
+  var project_id = parseInt(req.params.project_id)
+  db.any('select * from milestones where user_id=$1 and project_id=$2', [user_id, project_id])
+  .then(function(data) {
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'Retrieved All milestones'
+    });
+  })
+  .catch(function(err) {
+    return next(err);
+  });
+}
+
+
+
 module.exports = {
   getAllUsers: getAllUsers,
   signIn: signIn,
@@ -183,5 +216,7 @@ module.exports = {
   deleteProject: deleteProject,
   addWorkout: addWorkout,
   getAllWorkouts: getAllWorkouts,
-  deleteWorkout: deleteWorkout
+  deleteWorkout: deleteWorkout,
+  addMilestone: addMilestone,
+  getAllMilestones: getAllMilestones
 };
