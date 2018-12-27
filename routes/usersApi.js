@@ -19,9 +19,9 @@ router.post('/progressionusers/milestones/new', db.addMilestone)
 router.get('/progressionusers/:id/projects/:project_id/milestones', db.getAllMilestones)
 router.delete('/progressionusers/:id/projects/:project_id/milestones/:milestone_id', db.deleteMilestone)
 
-router.post('/progressionusers/journal/new', db.addJournal)
+router.post('/progressionusers/journals/new', db.addJournal)
 router.get('/progressionusers/:id/projects/:project_id/journal', db.getJournal)
-router.delete('/progressionusers/:id/projects/:project_id/journal/:journal_id', db.deleteJournal)
+router.delete('/progressionusers/:id/projects/:project_id/journals/:journal_id', db.deleteJournal)
 
 router.post('/progressionusers/workouts/new', db.addWorkout)
 router.get('/progressionusers/:id/workouts', db.getAllWorkouts)
