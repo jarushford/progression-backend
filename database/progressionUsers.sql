@@ -53,6 +53,7 @@ CREATE TABLE journal (
   id SERIAL NOT NULL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   project_id INTEGER NOT NULL,
+  journal_date VARCHAR (123) NOT NULL,
   entry VARCHAR (800) NOT NULL
 );
 

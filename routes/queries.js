@@ -216,6 +216,49 @@ function deleteMilestone(req, res, next) {
 }
 
 
+//////////////////////////
+//////////////////////////
+
+
+function addJournal(req, res, next) {
+  db.one('insert into journal(user_id, project_id, journal_date, entry)' +
+  'values(${user_id}, ${project_id}, ${journal_date}, ${entry}) returning id', req.body)
+  .then(function(data) {
+    res.status(200).json({ status: 'success', message: "Entry was added to database", id: data.id});
+  }).catch(function(err) {
+    next(err);
+  })
+}
+
+function getJournal(req, res, next) {
+  var user_id = parseInt(req.params.id);
+  var project_id = parseInt(req.params.project_id)
+  db.any('select * from journal where user_id=$1 and project_id=$2', [user_id, project_id])
+  .then(function(data) {
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'Retrieved All journal entries'
+    });
+  })
+  .catch(function(err) {
+    return next(err);
+  });
+}
+
+function deleteJournal(req, res, next) {
+  var id = parseInt(req.params.journal_id);
+  var user_id = parseInt(req.params.id);
+  var project_id = parseInt(req.params.project_id);
+  db.result('delete from journal where id = $1 and user_id = $2 and project_id = $3', [id, user_id, project_id]).then(function(result) {
+    res.status(200)
+    .json({status: 'success', message: `${result.rowCount} row was deleted.`})
+  })
+  .catch(function(err) {
+    return next(err);
+  });
+}
+
 
 module.exports = {
   getAllUsers: getAllUsers,
@@ -232,5 +275,8 @@ module.exports = {
   deleteWorkout: deleteWorkout,
   addMilestone: addMilestone,
   getAllMilestones: getAllMilestones,
-  deleteMilestone: deleteMilestone
+  deleteMilestone: deleteMilestone,
+  addJournal: addJournal,
+  getJournal: getJournal,
+  deleteJournal: deleteJournal
 };
