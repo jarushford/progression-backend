@@ -202,6 +202,19 @@ function getAllMilestones(req, res, next) {
   });
 }
 
+function deleteMilestone(req, res, next) {
+  var id = parseInt(req.params.milestone_id);
+  var user_id = parseInt(req.params.id);
+  var project_id = parseInt(req.params.project_id);
+  db.result('delete from milestones where id = $1 and user_id = $2 and project_id = $3', [id, user_id, project_id]).then(function(result) {
+    res.status(200)
+    .json({status: 'success', message: `${result.rowCount} row was deleted.`})
+  })
+  .catch(function(err) {
+    return next(err);
+  });
+}
+
 
 
 module.exports = {
@@ -218,5 +231,6 @@ module.exports = {
   getAllWorkouts: getAllWorkouts,
   deleteWorkout: deleteWorkout,
   addMilestone: addMilestone,
-  getAllMilestones: getAllMilestones
+  getAllMilestones: getAllMilestones,
+  deleteMilestone: deleteMilestone
 };
