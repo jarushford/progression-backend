@@ -13,14 +13,14 @@ router.delete('/progressionusers/:id/ascents/:ascent_id', db.deleteAscent)
 router.post('/progressionusers/projects/new', db.addProject)
 router.get('/progressionusers/:id/projects', db.getAllProjects)
 router.delete('/progressionusers/:id/projects/:project_id', db.deleteProject)
-// router.patch('/progressionusers/:id/projects/:project_id', db.editProject)
+router.put('/progressionusers/:id/projects/:project_id', db.editProject)
 
 router.post('/progressionusers/milestones/new', db.addMilestone)
 router.get('/progressionusers/:id/projects/:project_id/milestones', db.getAllMilestones)
 router.delete('/progressionusers/:id/projects/:project_id/milestones/:milestone_id', db.deleteMilestone)
 
 router.post('/progressionusers/journals/new', db.addJournal)
-router.get('/progressionusers/:id/projects/:project_id/journal', db.getJournal)
+router.get('/progressionusers/:id/projects/:project_id/journals', db.getJournal)
 router.delete('/progressionusers/:id/projects/:project_id/journals/:journal_id', db.deleteJournal)
 
 router.post('/progressionusers/workouts/new', db.addWorkout)

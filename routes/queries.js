@@ -4,7 +4,9 @@ var options = {
   promiseLib: promise
 };
 
-var pgp = require('pg-promise')(options);
+var pgp = require('pg-promise')({
+    capSQL: true
+});
 var connectionString = 'postgres://localhost:5432/progressionusers';
 var db = pgp(connectionString);
 
@@ -127,6 +129,36 @@ function deleteProject(req, res, next) {
   .catch(function(err) {
     return next(err);
   })
+}
+
+function editProject(req, res, next) {
+  var user_id = parseInt(req.params.id)
+  var id = parseInt(req.params.project_id)
+  var body = JSON.parse(Object.keys(req.body)[0])
+  db.tx(t => {
+    return t.batch([
+      t.none('update projects set user_id = $2 where id = $1', [id, user_id]),
+      t.none('update projects set name = $2 where id = $1', [id, body.name]),
+      t.none('update projects set location = $2 where id = $1', [id, body.location]),
+      t.none('update projects set grade = $2 where id = $1', [id, body.grade]),
+      t.none('update projects set priority = $2 where id = $1', [id, body.priority]),
+      t.none('update projects set season = $2 where id = $1', [id, body.season]),
+      t.none('update projects set moves_total = $2 where id = $1', [id, body.moves_total]),
+      t.none('update projects set moves_done = $2 where id = $1', [id, body.moves_done]),
+      t.none('update projects set high_point = $2 where id = $1', [id, body.high_point]),
+      t.none('update projects set caption = $2 where id = $1', [id, body.caption])
+    ]);
+  })
+    .then(function () {
+      res.status(200)
+        .json({
+            'status': 'success',
+            'message': 'Updated Project'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
 }
 
 
@@ -270,6 +302,7 @@ module.exports = {
   addProject: addProject,
   getAllProjects: getAllProjects,
   deleteProject: deleteProject,
+  editProject: editProject,
   addWorkout: addWorkout,
   getAllWorkouts: getAllWorkouts,
   deleteWorkout: deleteWorkout,
