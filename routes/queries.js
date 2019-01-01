@@ -122,7 +122,14 @@ function getAllProjects(req, res, next) {
 function deleteProject(req, res, next) {
   var id = parseInt(req.params.project_id);
   var user_id = parseInt(req.params.id);
-  db.result('delete from projects where id = $1 and user_id = $2', [id, user_id]).then(function(result) {
+  db.tx(t => {
+    return t.batch([
+      t.none('delete from projects where id = $1 and user_id = $2', [id, user_id]),
+      t.none('delete from milestones where project_id = $1 and user_id = $2', [id, user_id]),
+      t.none('delete from journal where project_id = $1 and user_id = $2', [id, user_id])
+    ]);
+  })
+    .then(function(result) {
     res.status(200)
     .json({status: 'success', message: `${result.rowCount} row was deleted.`})
   })
