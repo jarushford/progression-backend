@@ -38,7 +38,8 @@ CREATE TABLE workouts (
   user_id INTEGER NOT NULL,
   workout_date VARCHAR (123) NOT NULL,
   type VARCHAR (123) NOT NULL,
-  description VARCHAR (123) NOT NULL
+  description VARCHAR (123) NOT NULL,
+  completed BOOLEAN NOT NULL
 );
 
 CREATE TABLE milestones (
