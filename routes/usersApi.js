@@ -26,6 +26,6 @@ router.delete('/progressionusers/:id/projects/:project_id/journals/:journal_id',
 router.post('/progressionusers/workouts/new', db.addWorkout)
 router.get('/progressionusers/:id/workouts', db.getAllWorkouts)
 router.delete('/progressionusers/:id/workouts/:workout_id', db.deleteWorkout)
-// router.patch('/progressionusers/:id/workouts/:workout_id', db.editWorkout)
+router.put('/progressionusers/:id/workouts/:workout_id', db.editWorkout)
 
 module.exports = router;

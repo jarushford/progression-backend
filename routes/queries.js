@@ -202,6 +202,31 @@ function deleteWorkout(req, res, next) {
   })
 }
 
+function editWorkout(req, res, next) {
+  var user_id = parseInt(req.params.id)
+  var id = parseInt(req.params.workout_id)
+  db.tx(t => {
+    return t.batch([
+      t.none('update workouts set user_id = $2 where id = $1', [id, user_id]),
+      t.none('update workouts set workout_date = $2 where id = $1', [id, req.body.workout_date]),
+      t.none('update workouts set type = $2 where id = $1', [id, req.body.type]),
+      t.none('update workouts set description = $2 where id = $1', [id, req.body.description]),
+      t.none('update workouts set completed = $2 where id = $1', [id, req.body.completed])
+    ]);
+  })
+    .then(function () {
+      res.status(200)
+        .json({
+            'status': 'success',
+            'message': 'Updated Workout'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
 
 ///////////////////////////
 ///////////////////////////
@@ -305,6 +330,7 @@ module.exports = {
   addWorkout: addWorkout,
   getAllWorkouts: getAllWorkouts,
   deleteWorkout: deleteWorkout,
+  editWorkout: editWorkout,
   addMilestone: addMilestone,
   getAllMilestones: getAllMilestones,
   deleteMilestone: deleteMilestone,
