@@ -7,7 +7,7 @@ var options = {
 var pgp = require('pg-promise')({
     capSQL: true
 });
-var connectionString = `postgres://fajcohuvcntgkn:06a7f78f64983afd4dc3aeb298b6d6fa8b4cc7d9667b1a6fe0a589ff2f9d8e70@ec2-107-22-162-8.compute-1.amazonaws.com:5432/d2e1dsr4ujs19k`;
+var connectionString = process.env.DATABASE_URL;
 var db = pgp(connectionString);
 
 function getAllUsers(req, res, next) {
