@@ -1,8 +1,6 @@
 DROP DATABASE IF EXISTS progressionusers;
 CREATE DATABASE progressionusers;
 
-\c progressionusers;
-
 CREATE TABLE progressionusers (
   id SERIAL NOT NULL PRIMARY KEY,
   name VARCHAR (123) NOT NULL,
@@ -59,3 +57,6 @@ CREATE TABLE journal (
 );
 
 CREATE UNIQUE INDEX email ON progressionusers (email);
+
+INSERT INTO progressionusers (name, password, email)
+  VALUES ('Jamie', 'test', 'test@test.com');
