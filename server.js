@@ -3,9 +3,10 @@ const path = require('path');
 const express = require('express');
 const cors = require('express-cors');
 var bodyParser = require('body-parser')
-const port = (process.env.PORT || 3000);
+const port = (process.env.DATABASE_URL || 3000);
 const app = express();
 const progressionusers = require('./routes/usersApi');
+const environment = process.env.NODE_ENV || 'development';
 
 app.use(cors());
 app.use(function(req, res, next) {
