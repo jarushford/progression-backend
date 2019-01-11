@@ -1,4 +1,5 @@
 var promise = require('bluebird');
+require('dotenv').config()
 
 var options = {
   promiseLib: promise
