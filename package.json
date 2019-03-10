@@ -25,7 +25,8 @@
     "express-cors": "0.0.3",
     "history": "^4.6.3",
     "pg-promise": "^8.3.0",
-    "raf": "^3.4.0"
+    "raf": "^3.4.0",
+    "lodash": ">=4.17.11"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
